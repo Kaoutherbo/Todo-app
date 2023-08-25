@@ -1,0 +1,25 @@
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title To-Do List
+    link(rel="stylesheet", href="/style.css")
+  body
+   
+    main.todo-app
+      h2 My Tasks 
+        img(src="/images/icon.png", alt="icon-todo")
+      div.row
+        form(action="/addTask", method="post")
+          input#input-box(type="text", name="task", placeholder="Add your task")
+          button#submit(type="submit") Add
+      ul#list-container
+        each task, index in tasks
+          li
+            form.first(action="/toggleTask", method="post" )
+              button.checkmark(type="submit" name="index" value=index  class=task.completed ? 'completed' : '') 
+              span.task-text(class=task.completed ? 'completed' : '')= task.text
+            form.second(action="/deleteTask", method="post")
+              button.close(type="submit" name="index" value=index)   
